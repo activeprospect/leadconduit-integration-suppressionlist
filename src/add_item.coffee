@@ -32,7 +32,7 @@ response = (vars, req, res) ->
 
 response.variables = ->
   [
-    { name: 'add_item.outcome', type: 'string', description: 'Was the email sent? (\'success\' or \'error\')' },
+    { name: 'add_item.outcome', type: 'options', options: "[ { name: 'Success', value: 'success' }, { name: 'Error', value: 'error' } ]", description: 'Was SuppressionList data appended?' },
     { name: 'add_item.reason', type: 'string', description: 'Error reason' },
     { name: 'add_item.accepted', type: 'number', description: 'the number of items added to the list'},
     { name: 'add_item.rejected', type: 'number', description: 'the number of items not added to the list'}

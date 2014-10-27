@@ -5,7 +5,7 @@ describe 'Query List Item Request', ->
   request = null
 
   beforeEach ->
-    request = integration.request(activeprospect: {api_key: '1234'}, list_ids: 'seabass, things, more_things', list_item: 'boilermakers@example.com')
+    request = integration.request(activeprospect: {api_key: '1234'}, list_ids: 'seabass, things, more_things', values: 'boilermakers@example.com')
 
   it 'should have url', ->
     assert.equal 'https://app.suppressionlist.com/exists/seabass|things|more_things/boilermakers@example.com', request.url
@@ -40,7 +40,7 @@ describe 'Query List Item Response', ->
         specified_lists: ["list_1", "list_2", "list_3"]
         key: 'taylor@activeprospect.com'
         found: true
-        exists_in_lists: ["list_2", "list_3"]
+        found_in: ["list_2", "list_3"]
     response = integration.response(vars, req, res)
     assert.deepEqual expected, response
 

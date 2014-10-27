@@ -3,14 +3,12 @@ mimecontent = require('mime-content')
 request = (vars) ->
   values = vars.values.split(', ').join('|')
 
-  url: "https://app.suppressionlist.com/lists/#{vars.list_id}/items"
+  url: "https://app.suppressionlist.com/lists/#{vars.list_id}/items/#{vars.values}"
   method: 'DELETE'
   headers:
     'Content-Type': 'application/json'
     'Accept': 'application/json'
     'Authorization': "Basic #{new Buffer("X:#{vars.activeprospect.api_key}").toString('base64')}"
-  body:
-    JSON.stringify(values: values)
 request.variables = ->
   [
     { name: 'list_id',   description: 'SuppressionList List Id',                                  type: 'string', required: true },
@@ -32,7 +30,7 @@ response = (vars, req, res) ->
 
 response.variables = ->
   [
-    { name: 'delete_item.outcome', type: 'string', description: 'Was the email sent? (\'success\' or \'error\')' },
+    { name: 'delete_item.outcome', type: 'options', options: "[ { name: 'Success', value: 'success' }, { name: 'Error', value: 'error' } ]", description: 'Was SuppressionList data appended?' },
     { name: 'delete_item.reason', type: 'string', description: 'Error reason' },
     { name: 'delete_item.deleted', type: 'number', description: 'the number of items removed from the list'},
     { name: 'delete_item.rejected', type: 'number', description: 'the number of items not removed from the list'}

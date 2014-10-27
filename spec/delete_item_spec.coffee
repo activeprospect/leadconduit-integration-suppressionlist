@@ -5,10 +5,10 @@ describe 'Delete List Item Request', ->
   request = null
 
   beforeEach ->
-    request = integration.request(activeprospect: {api_key: '1234'}, list_id: 'things', values: 'boilermakers@example.com, taylor@activeprospect.com')
+    request = integration.request(activeprospect: {api_key: '1234'}, list_id: 'things', values: 'taylor@activeprospect.com')
 
   it 'should have url', ->
-    assert.equal 'https://app.suppressionlist.com/lists/things/items', request.url
+    assert.equal 'https://app.suppressionlist.com/lists/things/items/taylor@activeprospect.com', request.url
 
   it 'should be delete', ->
     assert.equal 'DELETE', request.method
@@ -16,8 +16,6 @@ describe 'Delete List Item Request', ->
   it 'should accept JSON', ->
     assert.equal 'application/json', request.headers.Accept
 
-  it 'should have the correct body', ->
-    assert.equal '{"values":"boilermakers@example.com|taylor@activeprospect.com"}', request.body
 
 describe 'Delete List Item Response', ->
   it 'should parse JSON body', ->
