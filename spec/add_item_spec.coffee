@@ -5,7 +5,7 @@ describe 'Add List Item Request', ->
   request = null
 
   beforeEach ->
-    request = integration.request(activeprospect: {api_key: '1234'}, list_id: 'things', values: 'boilermakers@example.com, taylor@activeprospect.com')
+    request = integration.request(activeprospect: {api_key: '1234'}, list_id: 'things', values: 'boilermakers@example.com, taylor@activeprospect.com, foo bar, baz')
 
   it 'should have url', ->
     assert.equal 'https://app.suppressionlist.com/lists/things/items', request.url
@@ -17,7 +17,7 @@ describe 'Add List Item Request', ->
     assert.equal 'application/json', request.headers.Accept
 
   it 'should have the correct body', ->
-    assert.equal '{"values":"boilermakers@example.com|taylor@activeprospect.com"}', request.body
+    assert.equal '{"values":"boilermakers@example.com|taylor@activeprospect.com|foo bar|baz"}', request.body
 
 describe 'Add List Item Response', ->
   it 'should parse JSON body', ->

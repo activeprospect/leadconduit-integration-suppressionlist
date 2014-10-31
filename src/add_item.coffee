@@ -1,7 +1,7 @@
 mimecontent = require('mime-content')
 
 request = (vars) ->
-  values = vars.values.split(',').join('|').replace(/\s+/g, '')
+  values = vars.values.split(',').join('|').replace(/\|\s/g, '|')
 
   url: "https://app.suppressionlist.com/lists/#{vars.list_id}/items"
   method: 'POST'
