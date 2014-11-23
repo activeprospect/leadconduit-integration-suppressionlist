@@ -1,9 +1,9 @@
 mimecontent = require('mime-content')
 
 request = (vars) ->
-  list_ids = vars.list_ids.split(', ').join('|')
+  list_ids = vars.list_ids.split(',').join('|').replace(/\s+/g, '')
 
-  url: "https://app.suppressionlist.com/exists/#{list_ids}/#{vars.list_item}"
+  url: "https://app.suppressionlist.com/exists/#{list_ids}/#{vars.values}"
   method: 'GET'
   headers:
     'Accept': 'application/json'
@@ -12,7 +12,7 @@ request = (vars) ->
 request.variables = ->
   [
     { name: 'list_ids',  description: 'SuppressionList List Id (comma separated)', type: 'string', required: true },
-    { name: 'list_item', description: 'Item to be looked up (phone/email/etc.)',   type: 'string', required: true }
+    { name: 'values', description: 'Item(s) to be looked up (phone/email/etc.)',   type: 'string', required: true }
   ]
 
 
@@ -25,18 +25,18 @@ response = (vars, req, res) ->
     event = JSON.parse(res.body)
     event.outcome = 'success'
     event.reason = null
+    event.found_in = event.exists_in_lists
+    delete event.exists_in_lists
 
   query_item: event
 
 
 response.variables = ->
   [
-    { name: 'query_item.outcome', type: 'string', description: 'Was the email sent? (\'success\' or \'error\')' },
+    { name: 'query_item.outcome', type: 'options', options: "[ { name: 'Success', value: 'success' }, { name: 'Error', value: 'error' } ]", description: 'Was SuppressionList data appended?' },
     { name: 'query_item.reason', type: 'string', description: 'Error reason' },
-    { name: 'query_item.list_item', type: 'string', description: 'the lookup item'},
     { name: 'query_item.found', type: 'boolean', description: 'is the lookup item found on any of the suppression lists?'},
-    { name: 'query_item.exists_in_lists', type: 'list', description: 'list of suppression lists the item was found within'},
-    { name: 'query_item.specified_lists', type: 'list', description: 'list of suppression lists that were queried'}
+    { name: 'query_item.found_in', type: 'array', description: 'list of suppression lists the item was found within'}
   ]
 
 
