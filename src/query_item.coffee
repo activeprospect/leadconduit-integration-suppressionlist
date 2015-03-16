@@ -2,8 +2,8 @@ mimecontent = require('mime-content')
 helper = require('./helper')
 
 request = (vars) ->
-  list_ids = helper.getListIds vars
-  values = helper.getValues vars
+  list_ids = helper.getListIds(vars)
+  values = helper.getValues(vars)
 
   url: "https://app.suppressionlist.com/exists/#{list_ids}/#{values}"
   method: 'GET'

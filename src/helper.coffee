@@ -4,9 +4,8 @@ getListIds = (vars) ->
 
 
 getValues = (vars) ->
-  values = vars.values or vars.list_item # 'list_item' is deprecated variable name for 'values'
+  values = escape(vars.values or vars.list_item) # 'list_item' is deprecated variable name for 'values'
   values.split(',').map((v) -> v.trim()).join('|')
-
 
 getRequestHeaders = (api_key, setContentType = true) ->
   headers =
