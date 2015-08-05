@@ -2,16 +2,16 @@ mimecontent = require('mime-content')
 helper = require('./helper')
 
 request = (vars) ->
-  list_ids = helper.getListIds vars
+  url_names = helper.getListIds vars
   values = helper.getValues vars
 
-  url: "https://app.suppressionlist.com/exists/#{list_ids}/#{values}"
+  url: "https://app.suppressionlist.com/exists/#{url_names}/#{values}"
   method: 'GET'
   headers: helper.getRequestHeaders(vars.activeprospect.api_key, false)
 
 request.variables = ->
   [
-    { name: 'list_ids',  description: 'SuppressionList List Id (comma separated)', type: 'string' }
+    { name: 'url_names',  description: 'SuppressionList URL Names (comma separated)', type: 'string' }
     { name: 'values', description: 'Item(s) to be looked up (phone/email/etc.)',   type: 'string' }
   ]
 

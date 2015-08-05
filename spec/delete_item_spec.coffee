@@ -7,7 +7,7 @@ describe 'Delete List Item', ->
     request = null
 
     beforeEach ->
-      request = integration.request(activeprospect: {api_key: '1234'}, list_id: 'things', values: 'taylor@activeprospect.com')
+      request = integration.request(activeprospect: {api_key: '1234'}, url_name: 'things', values: 'taylor@activeprospect.com')
 
     it 'should have url', ->
       assert.equal 'https://app.suppressionlist.com/lists/things/items', request.url
@@ -100,6 +100,6 @@ describe 'Delete List Item', ->
       expected =
         delete_item:
           outcome: 'error'
-          reason: 'SuppressionList error (500) Possibly incorrect list_id'
+          reason: 'SuppressionList error (500) Possibly incorrect url_name'
       response = integration.response(vars, req, res)
       assert.deepEqual expected, response

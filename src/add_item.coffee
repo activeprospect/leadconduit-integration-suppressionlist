@@ -4,7 +4,7 @@ helper = require('./helper')
 request = (vars) ->
   values = helper.getValues vars
 
-  url: "https://app.suppressionlist.com/lists/#{vars.list_id}/items"
+  url: "https://app.suppressionlist.com/lists/#{vars.url_name}/items"
   method: 'POST'
   headers: helper.getRequestHeaders(vars.activeprospect.api_key)
   body:
@@ -12,7 +12,7 @@ request = (vars) ->
 
 request.variables = ->
   [
-    { name: 'list_id', description: 'SuppressionList List Id', type: 'string' }
+    { name: 'url_name', description: 'SuppressionList URL Name', type: 'string' }
     { name: 'values', description: 'Item(s) to be added to SuppressionList (comma separated)', type: 'string' }
   ]
 

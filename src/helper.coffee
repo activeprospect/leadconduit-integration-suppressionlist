@@ -1,6 +1,6 @@
 
 getListIds = (vars) ->
-  vars.list_ids?.split(',').map((v) -> v.trim()).join('|')
+  vars.url_names?.split(',').map((v) -> v.trim()).join('|')
 
 
 getValues = (vars) ->
@@ -19,7 +19,7 @@ getRequestHeaders = (api_key, setContentType = true) ->
 
 
 validate = (vars) ->
-  return 'list_ids must not be blank' unless vars.list_ids?
+  return 'url_names must not be blank' unless vars.url_names?
   return 'values must not be blank' unless vars.values
 
 
@@ -28,7 +28,7 @@ parseResponse = (res, allow404 = false) ->
     body = JSON.parse(res.body)
   else
     body =
-      error: "Possibly incorrect list_id"
+      error: "Possibly incorrect url_name"
 
   if body.error? or (res.status != 200 and !allow404)
     event = { outcome: 'error', reason: "SuppressionList error (#{res.status}) #{body.error or ''}".trim()  }

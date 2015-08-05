@@ -5,20 +5,20 @@ describe 'Helper', ->
 
   describe 'Validate', ->
 
-    it 'should require list_ids', () ->
-      assert.equal helper.validate({}), 'list_ids must not be blank'
+    it 'should require url_names', () ->
+      assert.equal helper.validate({}), 'url_names must not be blank'
 
     it 'should require values', () ->
-      assert.equal helper.validate(list_ids: 'foo'), 'values must not be blank'
+      assert.equal helper.validate(url_names: 'foo'), 'values must not be blank'
 
     it 'should require values', () ->
-      assert.equal helper.validate(list_ids: 'foo', values: ''), 'values must not be blank'
+      assert.equal helper.validate(url_names: 'foo', values: ''), 'values must not be blank'
 
     it 'should require values', () ->
-      assert.equal helper.validate(list_ids: 'foo', values: null), 'values must not be blank'
+      assert.equal helper.validate(url_names: 'foo', values: null), 'values must not be blank'
 
-    it 'should be satisfied with list_ids and values', () ->
-      assert.isUndefined helper.validate(list_ids: 'foo', values: 'bar@baz.com')
+    it 'should be satisfied with url_names and values', () ->
+      assert.isUndefined helper.validate(url_names: 'foo', values: 'bar@baz.com')
 
   describe 'Request Headers', ->
     headers = {}
