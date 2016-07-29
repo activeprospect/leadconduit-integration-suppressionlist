@@ -16,7 +16,10 @@ toList = (vals) ->
   vals = [vals] unless _.isArray(vals)
   vals = _.compact vals
   _.compact _.flatten vals.map (v) ->
-    csv.parse(v)
+    try
+      csv.parse(v)
+    catch
+      _.map(v.split(','), _.trim)
 
 
 

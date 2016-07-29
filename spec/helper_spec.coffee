@@ -44,6 +44,10 @@ describe 'Helper', ->
             vars[key] = 'My List,"Bob\'s List, Unplugged",2015-10-12'
             assert.deepEqual helper.getListUrlNames(vars), 'my_list|bobs_list_unplugged|20151012'
 
+  describe 'get values', ->
+
+    it 'should handle non-csv values', ->
+      assert.deepEqual helper.getValues(values: 'foo, bar, "baz'), ['foo', 'bar', '"baz']
 
   describe 'Base URL', ->
 
