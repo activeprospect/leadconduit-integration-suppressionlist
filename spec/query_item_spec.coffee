@@ -32,6 +32,7 @@ describe 'Query List Item', ->
         status: 200,
         headers:
           'Content-Type': 'application/json'
+          'X-Runtime': 0.497349
         body: """
               {
                 "specified_lists": ["list_1", "list_2", "list_3"],
@@ -56,6 +57,7 @@ describe 'Query List Item', ->
         query_item:
           outcome: 'success'
           reason: null
+          duration: 0.497349
           specified_lists: ["list_1", "list_2", "list_3"]
           key: 'taylor@activeprospect.com'
           found: true
@@ -88,6 +90,7 @@ describe 'Query List Item', ->
         status: 404,
         headers:
           'Content-Type': "application/json"
+          'X-Runtime': 0.497349
         body: """
               {
                 "specified_lists": ["list_1"],
@@ -99,6 +102,7 @@ describe 'Query List Item', ->
         query_item:
           outcome: 'success'
           found: false
+          duration: 0.497349
           reason: null
           key: 'taylor@swift.com'
           specified_lists: [ 'list_1' ]

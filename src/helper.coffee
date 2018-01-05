@@ -65,6 +65,7 @@ parseResponse = (res) ->
     event = body
     event.outcome = 'success'
     event.reason = null
+    event.duration = res.headers['X-Runtime']
     event
 
 getBaseUrl = ->

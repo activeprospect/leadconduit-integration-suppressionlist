@@ -39,6 +39,7 @@ response.variables = ->
     { name: 'query_item.found', type: 'boolean', description: 'Is the lookup item found on any of the suppression lists?' }
     { name: 'query_item.found_in', type: 'array', description: 'List of suppression lists the item was found within' }
     { name: 'query_item.added_at', type: 'time', description: 'Most recent timestamp the found query item was added at' }
+    { name: 'query_item.duration', type: 'number', description: 'The number of seconds the API call took, according to SuppressionList' }
   ]
 
 
