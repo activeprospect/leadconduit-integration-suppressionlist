@@ -24,6 +24,7 @@ describe 'Is Unique', ->
     sl = nock 'https://app.suppressionlist.com'
       .defaultReplyHeaders
         'Content-Type': 'application/json'
+        'X-Runtime': 0.497349
       .get '/exists/email/hola'
       .reply 200,
         specified_lists: ['email']
@@ -41,6 +42,7 @@ describe 'Is Unique', ->
       assert.deepEqual event.is_unique.query_item,
         outcome: 'success'
         reason: null
+        duration: 0.497349
         key: 'hola'
         specified_lists: [ 'email' ]
         found: true
@@ -52,6 +54,9 @@ describe 'Is Unique', ->
 
   it 'should add when not found', (done) ->
     sl = nock('https://app.suppressionlist.com')
+      .defaultReplyHeaders
+        'Content-Type': 'application/json'
+        'X-Runtime': 0.497349
       # query not found
       .get '/exists/email/hola'
       .reply 404,
@@ -69,12 +74,14 @@ describe 'Is Unique', ->
       assert.deepEqual event.is_unique.query_item,
         outcome: 'success'
         reason: null
+        duration: 0.497349
         specified_lists: [ 'foo' ]
         key: 'bar'
         found: false
       assert.deepEqual event.is_unique.add_item,
         outcome: 'success'
         reason: null
+        duration: 0.497349
         accepted: 1
         rejected: 0
       sl.done()

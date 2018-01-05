@@ -25,7 +25,8 @@ describe 'Add List Item', ->
       res =
         status: 200,
         headers:
-          'Content-Type': 'application/json; charset=utf-8'
+          'Content-Type': 'application/json; charset=utf-8',
+          'X-Runtime': 0.497349
         body: """
               {
                 "accepted": 2,
@@ -36,6 +37,7 @@ describe 'Add List Item', ->
         add_item:
           outcome: 'success'
           reason: null
+          duration: 0.497349
           accepted: 2
           rejected: 0
       response = integration.response(vars, req, res)

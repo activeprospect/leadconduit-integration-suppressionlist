@@ -27,6 +27,7 @@ describe 'Delete List Item', ->
         status: 200,
         headers:
           'Content-Type': 'application/json; charset=utf-8'
+          'X-Runtime': 0.497349
         body: """
               {
                 "deleted": 2,
@@ -37,6 +38,7 @@ describe 'Delete List Item', ->
         delete_item:
           outcome: 'success'
           reason: null
+          duration: 0.497349
           deleted: 2
           rejected: 0
       response = integration.response(vars, req, res)
