@@ -27,6 +27,7 @@ response.variables = ->
     { name: 'add_item.reason', type: 'string', description: 'Error reason' }
     { name: 'add_item.accepted', type: 'number', description: 'the number of items added to the list' }
     { name: 'add_item.rejected', type: 'number', description: 'the number of items not added to the list' }
+    { name: 'add_item.duration', type: 'number', description: 'How long the call to SupressionList took, in seconds' }
   ]
 
 
