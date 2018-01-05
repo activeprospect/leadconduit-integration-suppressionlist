@@ -26,7 +26,7 @@ response.variables = ->
     { name: 'delete_item.reason', type: 'string', description: 'Error reason' }
     { name: 'delete_item.deleted', type: 'number', description: 'the number of items removed from the list' }
     { name: 'delete_item.rejected', type: 'number', description: 'the number of items not removed from the list' }
-    { name: 'delete_item.duration', type: 'number', description: 'How long the call to SupressionList took, in seconds' }
+    { name: 'delete_item.duration', type: 'number', description: 'The number of seconds the API call took, according to SuppressionList' }
   ]
 
 
