@@ -3,7 +3,7 @@ helper = require('../src/helper')
 types = require('leadconduit-types')
 
 describe 'Helper', ->
-  
+
   describe 'get list URL names', ->
 
     for key in ['list_ids', 'list_id', 'list_names', 'list_name']
@@ -105,5 +105,3 @@ describe 'Helper', ->
     it 'should not set content-type when told not to', ->
       headers = helper.getRequestHeaders('api_key', false)
       assert.isUndefined headers['Content-Type']
-
-
