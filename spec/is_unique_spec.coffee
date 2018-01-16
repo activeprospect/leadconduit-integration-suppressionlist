@@ -1,7 +1,7 @@
 _ = require('lodash')
 assert = require('chai').assert
 nock = require('nock')
-integration = require('../src/is-unique')
+integration = require('../lib/is-unique')
 
 describe 'Validate', ->
 

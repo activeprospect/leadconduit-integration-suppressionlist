@@ -1,5 +1,5 @@
 assert = require('chai').assert
-integration = require('../src/query_item')
+integration = require('../lib/query_item')
 
 describe 'Query List Item', ->
 

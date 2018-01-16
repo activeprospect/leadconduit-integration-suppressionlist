@@ -1,5 +1,5 @@
 assert = require('chai').assert
-integration = require('../src/add_item')
+integration = require('../lib/add_item')
 
 describe 'Add List Item', ->
 

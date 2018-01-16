@@ -1,5 +1,5 @@
 assert = require('chai').assert
-integration = require('../src/delete_item')
+integration = require('../lib/delete_item')
 
 describe 'Delete List Item', ->
 

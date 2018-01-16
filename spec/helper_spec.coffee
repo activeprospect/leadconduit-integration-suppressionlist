@@ -1,5 +1,5 @@
 assert = require('chai').assert
-helper = require('../src/helper')
+helper = require('../lib/helper')
 types = require('leadconduit-types')
 
 describe 'Helper', ->
