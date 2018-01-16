@@ -4,7 +4,7 @@
   "description": "LeadConduit integration with SuppressionList",
   "main": "index.js",
   "scripts": {
-    "test": "cake test",
+    "test": "mocha",
     "prepublish": "webpack --config lib/ui/webpack.config.js",
     "postpublish": "rm lib/ui/public/dist/*"
   },
