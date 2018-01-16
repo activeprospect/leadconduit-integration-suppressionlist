@@ -116,7 +116,7 @@ function init(config) {
           });
         }
 
-        ui.close({
+        ui.create({
           flow: {
             steps: steps
           }
@@ -159,7 +159,7 @@ function init(config) {
           name: 'Duplicate Checking',
           ttl: state.ttl == 'custom' ? ((state.ttlSeconds || 0) * (state.ttlUnit || 1)) : state.ttl
         }).then(function(response) {
-          ui.close({
+          ui.create({
             flow: {
               steps: [{
                 type: 'recipient',
