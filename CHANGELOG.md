@@ -2,9 +2,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [2.1.1] - 2018-01-16
+### Added
+- Convert to js
+
 ## [2.1.0] - 2018-01-05
 ### Added
-- - Capture duration data from SL api
+- Capture duration data from SL api
 
 ## [2.0.5] - 2017-10-26
 ### Fixed

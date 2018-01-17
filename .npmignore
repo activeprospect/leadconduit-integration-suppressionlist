@@ -1,5 +1,4 @@
-.idea
 .nyc_output
-spec
+.idea
+.DS_Store
 test
-Cakefile
