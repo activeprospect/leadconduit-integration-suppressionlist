@@ -8,7 +8,7 @@ describe('Helper', () => {
 
     ['list_ids', 'list_id', 'list_names', 'list_name'].forEach(key => {
       describe(`specified with ${key}`, () => {
-        
+
         it('should handle single value', () => {
           let vars = { [key] : 'foo' };
           assert.deepEqual(helper.getListUrlNames(vars), 'foo');
@@ -65,7 +65,7 @@ describe('Helper', () => {
 
     it('should get development url', () => {
       process.env.NODE_ENV = 'development';
-      assert.equal(helper.getBaseUrl(), 'http://suppressionlist.dev');
+      assert.equal(helper.getBaseUrl(), 'http://suppressionlist.test');
     });
 
     it('should use the production url when process.env.NODE_ENV is undefined', () => {
