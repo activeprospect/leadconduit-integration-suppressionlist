@@ -4,7 +4,7 @@
   "description": "LeadConduit integration with SuppressionList",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "harness",
     "prepublish": "webpack --config lib/ui/webpack.config.js",
     "postpublish": "rm lib/ui/public/dist/*"
   },
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "chai": ">= 1.9.0",
+    "leadconduit-harness": "~0.0.1",
     "leadconduit-types": "^4.8.1",
     "mocha": ">= 1.17.0",
     "nock": "^9.0.13"

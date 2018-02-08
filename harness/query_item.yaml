@@ -1,0 +1,114 @@
+validate:
+-
+  should: pass
+  vars:
+    list_names: cranberries
+    value: delores@cranberries.com
+-
+  should: fail when missing 'value'
+  vars:
+    list_names: cranberries
+  expected: values must not be blank
+-
+  should: fail when missing 'list_names'
+  vars:
+    value: delores@cranberries.com
+  expected: a list name is required
+
+request:
+-
+  should: correctly formulate the request
+  vars:
+    list_names: my_list
+    value: foo@bar.com
+  expected:
+    headers: 
+      Accept: application/json
+      Authorization: Basic WDpmb28=
+    method: GET
+    url: https://app.suppressionlist.com/exists/my_list/foo%40bar.com
+
+response:
+-
+  # found
+  should: parse JSON body
+  res:
+    headers:
+      Content-Type: application/json
+      'X-Runtime': 0.123
+    status: 200
+    body: >
+      {
+        "specified_lists": ["list_1", "list_2", "list_3"],
+        "key": "taylor@activeprospect.com",
+        "found": true,
+        "exists_in_lists": ["list_2", "list_3"],
+        "entries": [
+          {
+            "list_id" : "558dbd69021823dc0b000001",
+            "list_url_name" : "list_2",
+            "added_at" : "2015-08-27T16:18:16Z"
+          },
+          {
+            "list_id" : "558dbd69021823dc0b000002",
+            "list_url_name" : "list_3",
+            "added_at" : "2015-08-28T16:18:16Z"
+          }
+        ]
+      }
+  expected:
+    query_item: 
+      specified_lists:
+        - list_1
+        - list_2
+        - list_3
+      key: taylor@activeprospect.com
+      found: true
+      outcome: success
+      reason: null
+      duration: 0.123
+      found_in:
+        - list_2
+        - list_3
+      added_at: '2015-08-28T16:18:16Z'
+-
+  # error
+  should: return error outcome on non-200 response status
+  res:
+    status: 400
+    headers:
+      Content-Type: application/json
+    body: >
+      {
+        "error": "No such account"
+      }
+  expected:
+    query_item:
+      outcome: error
+      reason: No such account
+-
+  should: return success outcome on not-found/404 response status
+  res:
+    status: 404
+    headers:
+      Content-Type: application/json
+      'X-Runtime': 0.123
+    body: >
+      {
+        "specified_lists": ["list_1"],
+        "key": "taylor@swift.com",
+        "found": false
+      }
+  expected:
+    query_item:
+      outcome: success
+      found: false
+      duration: 0.123
+      reason: null
+      key: taylor@swift.com
+      specified_lists:
+        - 'list_1'
+
+extra_vars:
+  activeprospect:
+    api_key: foo

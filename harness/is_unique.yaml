@@ -1,0 +1,127 @@
+handle:
+-
+  should: fail when item found by query
+  vars:
+    list_name: email
+    value: hola
+  nockOptions:
+    url: https://app.suppressionlist.com
+    verb: get
+    query: /exists/email/hola
+    headers: &defaultHeaders # look, this can be reused as `*defaultHeaders`!
+      content-type: application/json
+      'X-Runtime': 0.123
+    statusCode: 200
+    requestData:
+      activeprospect:
+        api_key: 123
+      list_name: email
+      value: hola
+    responseData: >
+      {
+        "specified_lists" :["email"],
+        "key": "hola",
+        "found": true,
+        "exists_in_lists": ["email"],
+        "entries": [
+          {
+            "list_id": "564b63bcec8d839ff9000004",
+            "list_url_name": "email",
+            "added_at": "2017-08-08T20:18:45Z"
+          }
+        ]
+      }
+  expected:
+    is_unique:
+      outcome: failure
+      reason: Duplicate
+      query_item:
+        added_at: '2017-08-08T20:18:45Z'
+        found: true
+        found_in:
+          - email
+        key: hola
+        outcome: success
+        duration: 0.123
+        reason: null
+        specified_lists:
+          - email
+    nocks_total: 1
+    query_item:
+      added_at: '2017-08-08T20:18:45Z'
+      found: true
+      found_in:
+        - email
+      key: hola
+      outcome: success
+      duration: 0.123
+      reason: null
+      specified_lists:
+        - email
+-
+  should: add when not found
+  vars: &test2vars
+    list_name: email
+    value: donna@thedonnas.com
+  nockOptions:
+    -
+      url: https://app.suppressionlist.com
+      verb: get
+      query: /exists/email/donna%40thedonnas.com
+      headers: *defaultHeaders
+      requestData: *test2vars
+      statusCode: 404
+      responseData: >
+        {
+          "specified_lists": ["email"],
+          "key": "donna@thedonnas.com",
+          "found": false
+        }
+    -
+      url: https://app.suppressionlist.com
+      verb: post
+      query: /lists/email/items
+      headers: *defaultHeaders
+      requestData: *test2vars
+      statusCode: 200
+      responseData: >
+        {
+          "accepted": 1,
+          "rejected": 0
+        }
+  expected:
+    is_unique:
+      outcome: success
+      query_item:
+        found: false
+        key: donna@thedonnas.com
+        outcome: success
+        duration: 0.123
+        reason: null
+        specified_lists:
+          - email
+      add_item:
+        outcome: success
+        duration: 0.123
+        accepted: 1
+        rejected: 0
+        reason: null
+    query_item:
+      found: false
+      key: donna@thedonnas.com
+      outcome: success
+      duration: 0.123
+      reason: null
+      specified_lists:
+        - email
+    add_item:
+      outcome: success
+      duration: 0.123
+      accepted: 1
+      rejected: 0
+      reason: null
+    nocks_total: 2
+
+extra_vars:
+  activeprospect:
+    api_key: 123
