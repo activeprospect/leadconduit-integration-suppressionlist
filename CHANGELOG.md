@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [2.1.3] - 2018-03-03
+### Added
+- Add metadata and icon
+
 ## [2.1.1] - 2018-01-16
 ### Added
 - Convert to js
