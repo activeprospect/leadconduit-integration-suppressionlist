@@ -32,15 +32,16 @@
   <!-- App specific code -->
   <script src="dist/index.js" type="text/javascript"></script>
 </head>
-<body>
-  <div class="modal-header">
-    <h3>Set up SuppressionList</h3>
-  </div>
+<body class="rich-integration-ui">
+  <span class="close-modal" ng-click="cancel()">Close</span>
+  <header>
+    Set up SuppressionList
+  </header>
   <pages>
     <page ng-controller="Page1Ctrl">
       <div class="loading-page" ng-if="loading"><span class="loading"></span></div>
       <div ng-if="!loading">
-        <div class="modal-body">
+        <section>
           <form>
           <p>Which action would you like to perform?</p>
             <ul>
@@ -58,15 +59,15 @@
               </li>
             </ul>
           </form>
-        </div>
-        <div class="modal-footer">
+        </section>
+        <footer>
           <button class="primary" ng-click="jump()" ng-disabled="!state.action">Next</button>
           <button ng-click="cancel()" class="tertiary-control">Cancel</button>
-        </div>
+        </footer>
       </div>
     </page>
     <page ng-controller="Page2Ctrl">
-      <div class="modal-body">
+      <section>
         <form>
           <ul ng-if="error">
             <li class="message-banner error" ng-bind="error"></li>
@@ -91,15 +92,15 @@
             </li>
           </ul>
         </form>
-      </div>
-      <div class="modal-footer">
-        <prev></prev>
+      </section>
+      <footer>
+        <prev ng-if="!startedWithIntegration"></prev><!-- If the user preselected an integration, let's not show them the select sceen -->
         <button class="primary" ng-click="finish()" ng-disabled="!state.list_name || ((state.value == 'other' || !state.basicFields.length) && !state.finalValue) || !state.value">OK</button>
         <button ng-click="cancel()" class="tertiary-control">Cancel</button>
-      </div>
+      </footer>
     </page>
     <page ng-controller="Page3Ctrl">
-      <div class="modal-body">
+      <section>
         <p>
           SuppressionList will check for unique leads and prevent them from being
           delivered again.
@@ -120,15 +121,15 @@
             </li>
           </ul>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button ng-if="allowPrevious" ng-click="startOver()">Previous</button>
+      </section>
+      <footer>
+        <button ng-if="allowPrevious && !startedWithIntegration" ng-click="startOver()">Previous</button>
         <button class="primary" ng-click="next()" ng-disabled="((state.value == 'other' || !state.basicFields.length) && !state.finalValue) || !state.value">Next</button>
         <button ng-click="cancel()" class="tertiary-control">Cancel</button>
-      </div>
+      </footer>
     </page>
     <page ng-controller="Page4Ctrl">
-      <div class="modal-body">
+      <sectiom>
         <form>
           <p>
             How long do you want to wait before allowing a lead to be delivered again?
@@ -147,12 +148,12 @@
             </li>
           </ul>
         </form>
-      </div>
-      <div class="modal-footer">
+      </sectiom>
+      <footer>
         <prev></prev>
         <button class="primary" ng-click="finish()" ng-disabled="!state.action || finishing" ng-class="{ processing: finishing }">OK</button>
         <button ng-click="cancel()" class="tertiary-control">Cancel</button>
-      </div>
+      </footer>
     </page>
   </pages>
 </body>
