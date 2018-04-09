@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [2.2.1] - 2018-04-09
+### Fixed
+- tweaked metadata text for `is_unique`
+
+## [2.2.0] - 2018-04-04
+### Fixed
+- UI: Handle preselected integration and update styles
+
 ## [2.1.3] - 2018-03-03
 ### Added
 - Add metadata and icon
