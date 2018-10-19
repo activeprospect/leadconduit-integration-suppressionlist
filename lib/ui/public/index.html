@@ -136,7 +136,7 @@
           </p>
           <ul>
             <li>
-              <select ng-options="time.value as time.text for time in amounts" ng-model="state.ttl">
+              <select ng-options="time.value as genAmountText(time.text, time.increment, time.unit) for time in amounts" ng-model="state.ttl">
                 <option value="">Never allow duplicates</option>
               </select>
             </li>

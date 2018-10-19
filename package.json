@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "prepublish": "webpack --config lib/ui/webpack.config.js",
+    "prepare": "webpack --config lib/ui/webpack.config.js",
     "postpublish": "rm lib/ui/public/dist/*"
   },
   "repository": {
@@ -23,12 +23,12 @@
     "body-parser": "^1.17.2",
     "bson": "^1.0.4",
     "csvrow": "^0.1.0",
-    "express": "^4.15.3",
+    "express": "^4.16.3",
     "express-session": "^1.15.3",
     "jquery": "^3.2.1",
     "leadconduit-integration-ui": "^1.0.0",
-    "lodash": "^4.17.4",
-    "request": "^2.81.0",
+    "lodash": "^4.17.11",
+    "request": "^2.88.0",
     "simple-angular-pagination": "^0.0.3",
     "suppressionlist": "^0.1.1",
     "webpack": "^3.0.0",
@@ -36,8 +36,8 @@
   },
   "devDependencies": {
     "chai": ">= 1.9.0",
-    "leadconduit-types": "^4.8.1",
-    "mocha": ">= 1.17.0",
+    "leadconduit-types": "^4.17.0",
+    "mocha": "^5.2.0",
     "nock": "^9.0.13"
   }
 }
