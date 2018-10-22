@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [2.3.1] - 2018-10-22
+### Fixed
+- Always create list with indefinite retention policy
+
 ## [2.3.0] - 2018-10-18
 ### Fixed
 - Support retention-policy-esque filter creation
