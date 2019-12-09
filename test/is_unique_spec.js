@@ -62,7 +62,7 @@ describe('Is Unique', () => {
       done();
     });
   });
-
+  
   it('should add when not found', (done) => {
     const sl = nock('https://app.suppressionlist.com')
       .defaultReplyHeaders({

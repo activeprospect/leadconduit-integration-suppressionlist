@@ -123,7 +123,6 @@ describe('Query List Item', () => {
       assert.deepEqual(response, expected);
     });
 
-
     it('should return failure on a 402 response status', () => {
       const res = {
         status: 402,
