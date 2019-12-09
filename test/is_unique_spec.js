@@ -62,7 +62,28 @@ describe('Is Unique', () => {
       done();
     });
   });
-  
+
+  it('should fail on query_item 402 error', (done) => {
+    const sl = nock('https://app.suppressionlist.com')
+      .defaultReplyHeaders({
+        'Content-Type': 'application/json',
+        'X-Runtime': 0.497349
+      })
+      .get('/exists/email/hola')
+      .reply(402,
+        {
+          message: 'Unpaid account'
+        })
+
+    integration.handle({ activeprospect: { api_key: '123' }, list_name: 'email', value: 'hola' }, (err, event) => {
+      if (err) return done(err);
+      assert.equal(_.get(event, 'is_unique.outcome'), 'failure');
+      assert.equal(_.get(event, 'is_unique.reason'), 'Unpaid account');
+      sl.done();
+      done();
+    });
+  });
+
   it('should add when not found', (done) => {
     const sl = nock('https://app.suppressionlist.com')
       .defaultReplyHeaders({
