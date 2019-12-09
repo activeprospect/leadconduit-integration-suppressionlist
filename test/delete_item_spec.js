@@ -70,6 +70,28 @@ describe('Delete List Item', () => {
       assert.deepEqual(expected, response);
     });
 
+    it('should return failure on a 402 response status', () => {
+      const res = {
+        status: 402,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: `
+        {
+          "message": "unpaid account",
+        }
+        `
+      };
+      const expected = {
+        delete_item: {
+          outcome: 'failure',
+          reason: 'Unpaid account'
+        }
+      };
+      const response = integration.response({}, {}, res);
+      assert.deepEqual(response, expected);
+    })
+
     it('should return error outcome on 500/HTML response', () => {
       const res = {
         status: 500,

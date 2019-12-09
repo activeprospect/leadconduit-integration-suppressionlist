@@ -146,7 +146,7 @@ describe('Query List Item', () => {
       assert.deepEqual(response, expected);
     })
 
-    it('should return failure on a 400 response status', () => {
+    it('should return failure on a 402 response status', () => {
       const res = {
         status: 402,
         headers: {
@@ -161,7 +161,7 @@ describe('Query List Item', () => {
       const expected = {
         query_item: {
           outcome: 'failure',
-          reas: 'Unpaid account'
+          reason: 'Unpaid account'
         }
       };
       const response = integration.response({}, {}, res);
