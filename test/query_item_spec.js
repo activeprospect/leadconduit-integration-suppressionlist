@@ -131,7 +131,7 @@ describe('Query List Item', () => {
         },
         body: `
         {
-          "message": "unpaid account,
+          "message": "unpaid account",
         }
         `
       };
