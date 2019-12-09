@@ -123,6 +123,7 @@ describe('Query List Item', () => {
       assert.deepEqual(response, expected);
     });
 
+
     it('should return failure on a 402 response status', () => {
       const res = {
         status: 402,
@@ -138,6 +139,29 @@ describe('Query List Item', () => {
       const expected = {
         query_item: {
           outcome: 'failure',
+          reason: 'Unpaid account'
+        }
+      };
+      const response = integration.response({}, {}, res);
+      assert.deepEqual(response, expected);
+    })
+
+    it('should return failure on a 400 response status', () => {
+      const res = {
+        status: 402,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: `
+        {
+          "message": "unpaid account",
+        }
+        `
+      };
+      const expected = {
+        query_item: {
+          outcome: 'failure',
+          reas: 'Unpaid account'
         }
       };
       const response = integration.response({}, {}, res);
