@@ -1,6 +1,6 @@
 {
   "name": "leadconduit-suppressionlist",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "LeadConduit integration with SuppressionList",
   "main": "index.js",
   "scripts": {
