@@ -122,6 +122,28 @@ describe('Query List Item', () => {
       const response = integration.response({}, {}, res);
       assert.deepEqual(response, expected);
     });
+
+    it('should return failure on a 402 response status', () => {
+      const res = {
+        status: 402,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: `
+        {
+          "message": "unpaid account",
+        }
+        `
+      };
+      const expected = {
+        query_item: {
+          outcome: 'failure',
+          reason: 'Unpaid account'
+        }
+      };
+      const response = integration.response({}, {}, res);
+      assert.deepEqual(response, expected);
+    })
   });
 
   describe('Validate', () => {
