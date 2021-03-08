@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [2.3.5] - 2021-03-08
+### Fixed
+- fix npm vulnerabilities
+
 ## [2.3.4] - 2019-12-10
 ### Fixed
 - Integration now has a failure outcome on receiving a 402 error code
