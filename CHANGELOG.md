@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [2.3.6] - 2021-04-13
+### Fixed
+- fix staging SL to use HTTPS
+
 ## [2.3.5] - 2021-03-08
 ### Fixed
 - fix npm vulnerabilities

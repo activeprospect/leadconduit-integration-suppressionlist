@@ -1,7 +1,7 @@
 {
   "name": "leadconduit-suppressionlist",
-  "version": "2.3.5",
-  "description": "LeadConduit integration with SuppressionList",
+  "version": "2.3.6",
+  "description": "LeadConduit Integration with SuppressionList",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
@@ -15,7 +15,8 @@
   "contributors": [
     "Chris Grayson <chris@activeprospect.com>",
     "Taylor Brooks <taylor@activeprospect.com>",
-    "Alex Wolfe <alex@activeprospect.com>"
+    "Alex Wolfe <alex@activeprospect.com>",
+    "Dean Daskalantonakis <dean@activeprospect.com>"
   ],
   "license": "CC-BY-NC-ND-4.0",
   "dependencies": {
@@ -30,7 +31,7 @@
     "lodash": "^4.17.11",
     "request": "^2.88.0",
     "simple-angular-pagination": "^0.0.3",
-    "suppressionlist": "^0.1.1"
+    "suppressionlist": "^0.1.2"
   },
   "devDependencies": {
     "chai": ">= 1.9.0",
