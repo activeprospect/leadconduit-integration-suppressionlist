@@ -4,8 +4,9 @@
   "description": "LeadConduit integration with SuppressionList",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "mocha",
-    "prepare": "webpack --config lib/ui/webpack.config.js",
+    "prepublishOnly": "webpack --config node_modules/@activeprospect/integration-dev-webpack/config.js",
     "postpublish": "rm lib/ui/public/dist/*"
   },
   "repository": {
@@ -33,12 +34,8 @@
     "suppressionlist": "^0.1.1"
   },
   "devDependencies": {
-    "chai": ">= 1.9.0",
-    "leadconduit-types": "^4.17.0",
-    "mocha": "^8.3.0",
-    "nock": "^9.0.13",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^4.5.0",
-    "webpack-dev-middleware": "^1.11.0"
+    "@activeprospect/integration-dev-dependencies": "^1.0.0",
+    "@activeprospect/integration-dev-webpack": "^1.0.0",
+    "leadconduit-types": "^4.17.0"
   }
 }
