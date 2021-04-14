@@ -13,11 +13,6 @@
     "type": "git",
     "url": "git://github.com/activeprospect/leadconduit-integration-suppressionlist.git"
   },
-  "contributors": [
-    "Chris Grayson <chris@activeprospect.com>",
-    "Taylor Brooks <taylor@activeprospect.com>",
-    "Alex Wolfe <alex@activeprospect.com>"
-  ],
   "license": "CC-BY-NC-ND-4.0",
   "dependencies": {
     "angular": "^1.6.4",
