@@ -60,7 +60,7 @@ describe('Helper', () => {
 
     it('should get staging url', () => {
       process.env.NODE_ENV = 'staging';
-      assert.equal(helper.getBaseUrl(), 'http://staging.suppressionlist.com');
+      assert.equal(helper.getBaseUrl(), 'https://staging.suppressionlist.com');
     });
 
     it('should get development url', () => {

@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [2.3.6] - 2021-04-14
+### Fixed
+- updated to use dev packages
+- fixed CI via Github Actions  
+- fixed staging URL ([ch21812](https://app.clubhouse.io/active-prospect/story/21812/upgrade-sl-staging-to-https))
+
 ## [2.3.5] - 2021-03-08
 ### Fixed
 - fix npm vulnerabilities

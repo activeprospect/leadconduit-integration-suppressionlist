@@ -51,7 +51,7 @@ describe('Is Unique', () => {
         {
           outcome: 'success',
           reason: null,
-          duration: 0.497349,
+          duration: '0.497349', // actually numeric but nock stringifies this
           key: 'hola',
           specified_lists: [ 'email' ],
           found: true,
@@ -111,7 +111,7 @@ describe('Is Unique', () => {
         {
           outcome: 'success',
           reason: null,
-          duration: 0.497349,
+          duration: '0.497349', // actually numeric but nock stringifies this
           specified_lists: [ 'foo' ],
           key: 'bar',
           found: false
@@ -121,7 +121,7 @@ describe('Is Unique', () => {
         {
           outcome: 'success',
           reason: null,
-          duration: 0.497349,
+          duration: '0.497349', // actually numeric but nock stringifies this
           accepted: 1,
           rejected: 0
         }
