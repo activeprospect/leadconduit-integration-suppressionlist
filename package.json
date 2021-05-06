@@ -6,8 +6,10 @@
   "scripts": {
     "lint": "eslint .",
     "test": "mocha",
-    "prepublishOnly": "webpack --config node_modules/@activeprospect/integration-dev-webpack/config.js",
-    "postpublish": "rm lib/ui/public/dist/*"
+    "prepublishOnly": "webpack --config node_modules/@activeprospect/integration-dev-dependencies/webpack_config.js",
+    "postpublish": "rm lib/ui/public/dist/*",
+    "fixlint": "eslint . --fix",
+    "watch": "webpack --watch --config node_modules/@activeprospect/integration-dev-dependencies/webpack_config.js"
   },
   "repository": {
     "type": "git",
@@ -29,8 +31,7 @@
     "suppressionlist": "^0.1.1"
   },
   "devDependencies": {
-    "@activeprospect/integration-dev-dependencies": "^1.0.0",
-    "@activeprospect/integration-dev-webpack": "^1.0.0",
+    "@activeprospect/integration-dev-dependencies": "^1.1.0",
     "leadconduit-types": "^4.17.0"
   }
 }
