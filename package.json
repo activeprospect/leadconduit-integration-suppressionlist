@@ -19,11 +19,9 @@
   "dependencies": {
     "angular": "^1.6.4",
     "body-parser": "^1.17.2",
-    "bson": "^1.0.4",
     "csvrow": "^0.1.0",
     "express": "^4.16.3",
     "express-session": "^1.15.3",
-    "jquery": "^3.2.1",
     "leadconduit-integration-ui": "^1.0.0",
     "lodash": "^4.17.11",
     "request": "^2.88.0",
