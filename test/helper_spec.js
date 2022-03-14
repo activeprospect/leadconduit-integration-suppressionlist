@@ -3,44 +3,41 @@ const helper = require('../lib/helper');
 const types = require('leadconduit-types');
 
 describe('Helper', () => {
-
   describe('get list URL names', () => {
-
     ['list_ids', 'list_id', 'list_names', 'list_name'].forEach(key => {
       describe(`specified with ${key}`, () => {
-
         it('should handle single value', () => {
-          let vars = { [key] : 'foo' };
+          const vars = { [key]: 'foo' };
           assert.deepEqual(helper.getListUrlNames(vars), 'foo');
         });
 
         it('should handle comma delimited list', () => {
-          let vars = { [key] : 'foo,bar,baz' };
+          const vars = { [key]: 'foo,bar,baz' };
           assert.deepEqual(helper.getListUrlNames(vars), 'foo|bar|baz');
         });
 
         it('should ignore comma delimited empty values', () => {
-          let vars = { [key] : ',,foo,,bar,baz,,' };
+          const vars = { [key]: ',,foo,,bar,baz,,' };
           assert.deepEqual(helper.getListUrlNames(vars), 'foo|bar|baz');
         });
 
         it('should handle array', () => {
-          let vars = { [key] : ['foo', 'bar', 'baz'] };
+          const vars = { [key]: ['foo', 'bar', 'baz'] };
           assert.deepEqual(helper.getListUrlNames(vars), 'foo|bar|baz');
         });
 
         it('should handle array with empty values', () => {
-          let vars = { [key] : ['foo', null, 'bar', '', 'baz', ''] };
+          const vars = { [key]: ['foo', null, 'bar', '', 'baz', ''] };
           assert.deepEqual(helper.getListUrlNames(vars), 'foo|bar|baz');
         });
 
         it('should handle array of comma delimited lists', () => {
-          let vars = { [key] : ['foo,bar,baz', 'bip,bap'] };
+          const vars = { [key]: ['foo,bar,baz', 'bip,bap'] };
           assert.deepEqual(helper.getListUrlNames(vars), 'foo|bar|baz|bip|bap');
         });
 
         it('should slugify', () => {
-          let vars = { [key] : 'My List,"Bob\'s List, Unplugged",2015-10-12' };
+          const vars = { [key]: 'My List,"Bob\'s List, Unplugged",2015-10-12' };
           assert.deepEqual(helper.getListUrlNames(vars), 'my_list|bobs_list_unplugged|20151012');
         });
       });
@@ -48,7 +45,6 @@ describe('Helper', () => {
   });
 
   describe('Base URL', () => {
-
     after(() => {
       process.env.NODE_ENV = 'test';
     });
@@ -75,35 +71,33 @@ describe('Helper', () => {
   });
 
   describe('Validate', () => {
-
     it('should require list_ids', () => {
       assert.equal(helper.validate({}), 'a list name is required');
     });
 
-    it('should require values',() => {
-      assert.equal(helper.validate({list_ids: 'foo'}), 'values must not be blank');
+    it('should require values', () => {
+      assert.equal(helper.validate({ list_ids: 'foo' }), 'values must not be blank');
     });
 
-    it('should require non empty string values',() => {
-      assert.equal(helper.validate({list_ids: 'foo', values: ''}), 'values must not be blank');
+    it('should require non empty string values', () => {
+      assert.equal(helper.validate({ list_ids: 'foo', values: '' }), 'values must not be blank');
     });
 
-    it('should require non null values',() => {
-      assert.equal(helper.validate({list_ids: 'foo', values: null}), 'values must not be blank');
+    it('should require non null values', () => {
+      assert.equal(helper.validate({ list_ids: 'foo', values: null }), 'values must not be blank');
     });
 
     it('should require values in typed fields', () => {
-      const lead = {email: types.email.parse('')};  // an empty lead.email (a String) is different than ''
-      assert.equal(helper.validate({list_ids: 'foo', values: lead.email}), 'values must not be blank');
+      const lead = { email: types.email.parse('') }; // an empty lead.email (a String) is different than ''
+      assert.equal(helper.validate({ list_ids: 'foo', values: lead.email }), 'values must not be blank');
     });
 
     it('should be satisfied with list_ids, values', () => {
-      assert.isUndefined(helper.validate({list_ids: 'foo', values: 'bar@baz.com'}));
+      assert.isUndefined(helper.validate({ list_ids: 'foo', values: 'bar@baz.com' }));
     });
   });
 
   describe('Request Headers', () => {
-
     let headers = helper.getRequestHeaders('api_key');
 
     it('should accept JSON', () => {
