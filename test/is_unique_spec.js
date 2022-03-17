@@ -4,23 +4,20 @@ const nock = require('nock');
 const integration = require('../lib/is-unique');
 
 describe('Validate', () => {
-
   it('should require list name', () => {
-    assert.equal(integration.validate({value: 'abc@outlook.com'}), 'a list name is required');
+    assert.equal(integration.validate({ value: 'abc@outlook.com' }), 'a list name is required');
   });
 
   it('should require value', () => {
-    assert.equal(integration.validate({list_name: 'mylist'}), 'value required');
+    assert.equal(integration.validate({ list_name: 'mylist' }), 'value required');
   });
 
   it('should pass validation', () => {
-    assert.isUndefined(integration.validate({value: 'abc@outlook.com', list_name: 'mylist'}));
+    assert.isUndefined(integration.validate({ value: 'abc@outlook.com', list_name: 'mylist' }));
   });
 });
 
-
 describe('Is Unique', () => {
-
   afterEach(() => {
     nock.cleanAll();
   });
@@ -53,9 +50,9 @@ describe('Is Unique', () => {
           reason: null,
           duration: '0.497349', // actually numeric but nock stringifies this
           key: 'hola',
-          specified_lists: [ 'email' ],
+          specified_lists: ['email'],
           found: true,
-          found_in: [ 'email' ],
+          found_in: ['email'],
           added_at: '2017-06-23T19:59:04Z'
         });
       sl.done();
@@ -73,7 +70,7 @@ describe('Is Unique', () => {
       .reply(402,
         {
           message: 'Unpaid account'
-        })
+        });
 
     integration.handle({ activeprospect: { api_key: '123' }, list_name: 'email', value: 'hola' }, (err, event) => {
       if (err) return done(err);
@@ -101,7 +98,7 @@ describe('Is Unique', () => {
       )
       // add
       .post('/lists/email/items')
-      .reply(200, {accepted: 1, rejected: 0});
+      .reply(200, { accepted: 1, rejected: 0 });
 
     integration.handle({ activeprospect: { api_key: '123' }, list_name: 'email', value: 'hola' }, (err, event) => {
       if (err) return done(err);
@@ -112,7 +109,7 @@ describe('Is Unique', () => {
           outcome: 'success',
           reason: null,
           duration: '0.497349', // actually numeric but nock stringifies this
-          specified_lists: [ 'foo' ],
+          specified_lists: ['foo'],
           key: 'bar',
           found: false
         }

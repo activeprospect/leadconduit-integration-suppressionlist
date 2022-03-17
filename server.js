@@ -1,7 +1,6 @@
-const express = require('express'),
-      session = require('express-session'),
-      ui      = require('./lib/ui');
-
+const express = require('express');
+const session = require('express-session');
+const ui = require('./lib/ui');
 
 express()
   .use(session({ secret: 'dev', resave: false, saveUninitialized: true }))
@@ -16,4 +15,3 @@ express()
   .listen(8080, () => {
     console.log('listening on 8080');
   });
-

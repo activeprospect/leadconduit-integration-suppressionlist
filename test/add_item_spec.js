@@ -2,9 +2,8 @@ const assert = require('chai').assert;
 const integration = require('../lib/add_item');
 
 describe('Add List Item', () => {
-
   describe('Request', () => {
-    let request = integration.request({activeprospect: {api_key: '1234'}, list_id: 'things', values: 'boilermakers@example.com, taylor@activeprospect.com'});
+    const request = integration.request({ activeprospect: { api_key: '1234' }, list_id: 'things', values: 'boilermakers@example.com, taylor@activeprospect.com' });
 
     it('should have url', () => {
       assert.equal(request.url, 'https://app.suppressionlist.com/lists/things/items');
@@ -20,7 +19,6 @@ describe('Add List Item', () => {
   });
 
   describe('Response', () => {
-
     it('should parse JSON body', () => {
       const res = {
         status: 200,
@@ -69,7 +67,7 @@ describe('Add List Item', () => {
       const response = integration.response({}, {}, res);
       assert.deepEqual(response, expected);
     });
-    
+
     it('should return failure on a 402 response status', () => {
       const res = {
         status: 402,
@@ -90,7 +88,7 @@ describe('Add List Item', () => {
       };
       const response = integration.response({}, {}, res);
       assert.deepEqual(response, expected);
-    })
+    });
 
     it('should return error outcome on 500/HTML response', () => {
       const res = {
@@ -138,21 +136,20 @@ describe('Add List Item', () => {
   });
 
   describe('Validate', () => {
-
     it('should require values', () => {
-      assert.equal(integration.validate({list_id: 'foo'}), 'values must not be blank');
+      assert.equal(integration.validate({ list_id: 'foo' }), 'values must not be blank');
     });
 
     it('should handle value with double quote', () => {
-      assert.equal(integration.validate({list_id: 'foo', values: 'donkeykong@gmail.com"'}), 'invalid values format');
+      assert.equal(integration.validate({ list_id: 'foo', values: 'donkeykong@gmail.com"' }), 'invalid values format');
     });
 
     it('should handle invalid list name', () => {
-      assert.equal(integration.validate({list_id: 'foo"', values: 'donkeykong@gmail.com'}), 'invalid list name format');
+      assert.equal(integration.validate({ list_id: 'foo"', values: 'donkeykong@gmail.com' }), 'invalid list name format');
     });
 
     it('should function properly', () => {
-      assert.isUndefined(integration.validate({list_id: 'foo', values: 'donkeykong@gmail.com'}));
+      assert.isUndefined(integration.validate({ list_id: 'foo', values: 'donkeykong@gmail.com' }));
     });
   });
 });

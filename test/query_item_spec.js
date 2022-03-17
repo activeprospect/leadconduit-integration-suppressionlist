@@ -2,10 +2,8 @@ const assert = require('chai').assert;
 const integration = require('../lib/query_item');
 
 describe('Query List Item', () => {
-
   describe('Request', () => {
-
-    let request = integration.request({activeprospect: {api_key: '1234'}, list_ids: 'seabass, things, more_things', value: 'boilermakers@example.com'});
+    let request = integration.request({ activeprospect: { api_key: '1234' }, list_ids: 'seabass, things, more_things', value: 'boilermakers@example.com' });
 
     it('should have url', () => {
       assert.equal(request.url, 'https://app.suppressionlist.com/exists/seabass|things|more_things/boilermakers%40example.com');
@@ -16,13 +14,13 @@ describe('Query List Item', () => {
     });
 
     it('should use first item if multiples query values are mapped', () => {
-      request = integration.request({activeprospect: {api_key: '1234'}, list_ids: 'things', value: 'test@example.com,foo@bar.com'});
+      request = integration.request({ activeprospect: { api_key: '1234' }, list_ids: 'things', value: 'test@example.com,foo@bar.com' });
       assert.equal(request.url, 'https://app.suppressionlist.com/exists/things/test%40example.com');
     });
 
     // this change shouldn't break existing mappings
     it('should still support old mappings to \'values\'', () => {
-      request = integration.request({activeprospect: {api_key: '1234'}, list_ids: 'things', values: 'test@example.com,foo@bar.com'});
+      request = integration.request({ activeprospect: { api_key: '1234' }, list_ids: 'things', values: 'test@example.com,foo@bar.com' });
       assert.equal(request.url, 'https://app.suppressionlist.com/exists/things/test%40example.com');
     });
   });
@@ -75,7 +73,7 @@ describe('Query List Item', () => {
     it('should return error outcome on non-200 response status', () => {
       const res = {
         status: 400,
-        headers:{
+        headers: {
           'Content-Type': 'application/json'
         },
         body: `
@@ -116,7 +114,7 @@ describe('Query List Item', () => {
           duration: 0.497349,
           reason: null,
           key: 'taylor@swift.com',
-          specified_lists: [ 'list_1' ]
+          specified_lists: ['list_1']
         }
       };
       const response = integration.response({}, {}, res);
@@ -143,12 +141,12 @@ describe('Query List Item', () => {
       };
       const response = integration.response({}, {}, res);
       assert.deepEqual(response, expected);
-    })
+    });
   });
 
   describe('Validate', () => {
     it('should function properly', () => {
-      assert.equal(integration.validate({list_ids: 'foo'}), 'values must not be blank');
+      assert.equal(integration.validate({ list_ids: 'foo' }), 'values must not be blank');
     });
   });
 });

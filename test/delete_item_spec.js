@@ -2,16 +2,15 @@ const assert = require('chai').assert;
 const integration = require('../lib/delete_item');
 
 describe('Delete List Item', () => {
-
   describe('Request', () => {
-    let request = integration.request({activeprospect: {api_key: '1234'}, list_id: 'things', values: 'taylor@activeprospect.com'});
+    const request = integration.request({ activeprospect: { api_key: '1234' }, list_id: 'things', values: 'taylor@activeprospect.com' });
 
     it('should have url', () => {
       assert.equal(request.url, 'https://app.suppressionlist.com/lists/things/items');
     });
 
     it('should be delete', () => {
-      assert.equal( request.method, 'DELETE');
+      assert.equal(request.method, 'DELETE');
     });
 
     it('should have body', () => {
@@ -20,7 +19,6 @@ describe('Delete List Item', () => {
   });
 
   describe('Response', () => {
-
     it('should parse JSON body', () => {
       const res = {
         status: 200,
@@ -44,7 +42,7 @@ describe('Delete List Item', () => {
           rejected: 0
         }
       };
-      const response = integration.response({},{},res);
+      const response = integration.response({}, {}, res);
       assert.deepEqual(expected, response);
     });
 
@@ -66,7 +64,7 @@ describe('Delete List Item', () => {
           reason: 'Something went wrong'
         }
       };
-      const response = integration.response({},{},res);
+      const response = integration.response({}, {}, res);
       assert.deepEqual(expected, response);
     });
 
@@ -90,7 +88,7 @@ describe('Delete List Item', () => {
       };
       const response = integration.response({}, {}, res);
       assert.deepEqual(response, expected);
-    })
+    });
 
     it('should return error outcome on 500/HTML response', () => {
       const res = {
@@ -132,14 +130,14 @@ describe('Delete List Item', () => {
           reason: 'Unsupported response'
         }
       };
-      const response = integration.response({},{},res);
+      const response = integration.response({}, {}, res);
       assert.deepEqual(expected, response);
     });
   });
 
   describe('Validate', () => {
     it('should function properly', () => {
-      assert.equal(integration.validate({list_id: 'foo'}), 'values must not be blank');
+      assert.equal(integration.validate({ list_id: 'foo' }), 'values must not be blank');
     });
   });
 });
