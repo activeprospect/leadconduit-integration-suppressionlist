@@ -69,10 +69,11 @@
     <page ng-controller="Page2Ctrl">
       <section>
         <form>
-          <ul ng-if="error">
-            <li class="message-banner error" ng-bind="error"></li>
+          <ul ng-if="unauthorized">
+            <li>Your account is not currently setup to use SuppressionList. This would allow you to check for Duplicate Leads, Existing Customers or consumers on your Do Not Contact lists before you bid.</li>
+            <li>Reach out to the <a href="mailto:clientsuccess@activeprospect.com" target="_blank">Client Success team</a> to enable this feature.</li>
           </ul>
-          <ul>
+          <ul ng-if="!unauthorized">
             <li>
               <label ng-if="state.action == 'add_item'">Which list do you want to add an item to?</label>
               <label ng-if="state.action == 'query_item'">Which list do you want to query?</label>
