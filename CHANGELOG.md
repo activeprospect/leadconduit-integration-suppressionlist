@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [2.3.9] - 2023-07-26
+### Fixed
+- now displays an error message if the account does not have a SuppressionList subscription
+
 ## [2.3.6] - 2021-04-14
 ### Fixed
 - updated to use dev packages
