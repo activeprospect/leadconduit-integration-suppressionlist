@@ -98,23 +98,40 @@ describe('Helper', () => {
   });
 
   describe('Request Headers', () => {
-    let headers = helper.getRequestHeaders('api_key');
+    beforeEach(() => {
+      process.env.SUPPRESSIONLIST_CPL_TOKEN = '4321';
+      this.vars = {
+        activeprospect: {
+          api_key: 'api_key'
+        }
+      };
+      this.headers = helper.getRequestHeaders(this.vars);
+    });
 
     it('should accept JSON', () => {
-      assert.equal(headers.Accept, 'application/json');
+      assert.equal(this.headers.Accept, 'application/json');
     });
 
     it('should set authorization header', () => {
-      assert.equal(headers.Authorization, 'Basic WDphcGlfa2V5');
+      assert.equal(this.headers.Authorization, 'Basic WDphcGlfa2V5');
     });
 
     it('should set content-type by default', () => {
-      assert.equal(headers['Content-Type'], 'application/json');
+      assert.equal(this.headers['Content-Type'], 'application/json');
     });
 
     it('should not set content-type when told not to', () => {
-      headers = helper.getRequestHeaders('api_key', false);
-      assert.isUndefined(headers['Content-Type']);
+      this.headers = helper.getRequestHeaders(this.vars, false);
+      assert.isUndefined(this.headers['Content-Type']);
+    });
+
+    it('should set CPL-Token header', () => {
+      assert.equal(this.headers['CPL-Token'], '4321');
+    });
+
+    it('should mask CPL token on second invocation', () => {
+      const masked = helper.getRequestHeaders(this.vars);
+      assert.equal(masked['CPL-Token'], '****');
     });
   });
 });
