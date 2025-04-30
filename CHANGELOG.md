@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org)
 
+## [2.3.13] - 2025-04-30
+### Fixed
+- now properly masks CPL-Token header in all cases for `is_unique`
+
 ## [2.3.12] - 2025-04-17
 ### Added
 - now sends CPL-Token header when token is present ([sc-88135](https://app.shortcut.com/active-prospect/story/88135/send-cpl-data-to-suppressionlist))
