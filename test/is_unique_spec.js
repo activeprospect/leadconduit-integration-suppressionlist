@@ -60,6 +60,74 @@ describe('Is Unique', () => {
     });
   });
 
+  it('should mask cpl-token on second invocation when outcome is success', (done) => {
+    const queryItemBody = {
+      specified_lists: ['foo'],
+      key: 'bar',
+      found: false
+    };
+    const addItemBody = {
+      accepted: 1,
+      rejected: 0
+    };
+    const sl = nock('https://app.suppressionlist.com')
+      .get('/exists/email/hola')
+      .matchHeader('cpl-token', '1234')
+      .reply(404, queryItemBody)
+      .post('/lists/email/items')
+      .matchHeader('cpl-token', '1234')
+      .reply(200, addItemBody)
+      .get('/exists/email/hola')
+      .matchHeader('cpl-token', '****')
+      .reply(404, queryItemBody)
+      .post('/lists/email/items')
+      .matchHeader('cpl-token', '****')
+      .reply(200, addItemBody);
+
+    const vars = { activeprospect: { api_key: '123' }, list_name: 'email', value: 'hola' };
+    process.env.SUPPRESSIONLIST_CPL_TOKEN = '1234';
+    integration.handle(vars, (err, event) => {
+      if (err) return done(err);
+      integration.handle(vars, (err, event) => {
+        if (err) return done(err);
+        assert.equal(_.get(event ,'is_unique.outcome'), 'success');
+        sl.done();
+        done();
+      });
+    });
+  });
+
+  it('should mask cpl-token on second invocation when outcome is failure', (done) => {
+    const body = {
+      specified_lists: ['email'],
+      key: 'hola',
+      found: true,
+      exists_in_lists: ['email'],
+      entries: [
+        { list_id: '53c95bb14efbbe8fca000004', list_url_name: 'email', added_at: '2017-06-23T19:59:04Z' }
+      ]
+    };
+    const sl = nock('https://app.suppressionlist.com')
+      .get('/exists/email/hola')
+      .matchHeader('cpl-token', '1234')
+      .reply(200, body)
+      .get('/exists/email/hola')
+      .matchHeader('cpl-token', '****')
+      .reply(200, body);
+
+    const vars = { activeprospect: { api_key: '123' }, list_name: 'email', value: 'hola' };
+    process.env.SUPPRESSIONLIST_CPL_TOKEN = '1234';
+    integration.handle(vars, (err, event) => {
+      if (err) return done(err);
+      integration.handle(vars, (err, event) => {
+        if (err) return done(err);
+        assert.equal(_.get(event ,'is_unique.outcome'), 'failure');
+        sl.done();
+        done();
+      });
+    });
+  });
+
   it('should fail on query_item 402 error', (done) => {
     const sl = nock('https://app.suppressionlist.com')
       .defaultReplyHeaders({
