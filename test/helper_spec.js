@@ -61,7 +61,7 @@ describe('Helper', () => {
 
     it('should get development url', () => {
       process.env.NODE_ENV = 'development';
-      assert.equal(helper.getBaseUrl(), 'http://suppressionlist.test');
+      assert.equal(helper.getBaseUrl(), 'https://development.suppressionlist.com');
     });
 
     it('should use the production url when process.env.NODE_ENV is undefined', () => {
